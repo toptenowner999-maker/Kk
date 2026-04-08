@@ -41,7 +41,7 @@ def start(message):
         InlineKeyboardButton("FREE DEMO 🎉", url="https://t.me/Pomp0mm_bot?start=BQADAQADdxQAAs65sEY6z3rGKGQgPBYE")
     )
     markup.add(
-        InlineKeyboardButton("HOW TO BUY PREMIUM 🧿", url="https://t.me/HOW_TO_BUY_PREMIUM")
+        InlineKeyboardButton("𝑷𝑹𝑬𝑴𝑰𝑼𝑴 𝑪𝑶𝑵𝑻𝑬𝑵𝑻 (𝑭𝑹𝑬𝑬) 🥵", url="https://t.me/+nRSyBDy65uQ5YmU1")
     )
 
     bot.send_photo(
