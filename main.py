@@ -81,7 +81,7 @@ def buy(call):
 
     bot.send_photo(
         chat_id=call.from_user.id,
-        photo="https://kommodo.ai/i/7q1diYvCngkoenmyTkzL",
+        photo="https://kommodo.ai/i/nGT8k6KYx4dU09gc1NC2",
         caption=text,
         parse_mode="Markdown",
         reply_markup=markup
