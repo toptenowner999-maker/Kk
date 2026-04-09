@@ -2,23 +2,41 @@ import os
 import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-# 🔒 ENV VARIABLES
+# 🔒 CONFIG
 TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_ID = int(os.getenv("ADMIN_ID"))
 
-bot = telebot.TeleBot(TOKEN)
+bot = telebot.TeleBot(TOKEN, parse_mode="HTML")
 
-banned_users = set()
-users = set()
+USERS_FILE = "users.txt"
+BANNED_FILE = "banned.txt"
+
+# 📂 LOAD DATA
+def load_data(file):
+    try:
+        with open(file, "r") as f:
+            return set(map(int, f.read().split()))
+    except:
+        return set()
+
+def save_data(file, user_id):
+    with open(file, "a") as f:
+        f.write(f"{user_id}\n")
+
+users = load_data(USERS_FILE)
+banned_users = load_data(BANNED_FILE)
 
 # 🔥 START COMMAND
 @bot.message_handler(commands=['start'])
 def start(message):
-    if message.from_user.id in banned_users:
+    user_id = message.from_user.id
+
+    if user_id in banned_users:
         return
 
-    user_id = message.from_user.id
-    users.add(user_id)
+    if user_id not in users:
+        users.add(user_id)
+        save_data(USERS_FILE, user_id)
 
     text = """🔥 𝐏𝐑𝐄𝐌𝐈𝐔𝐌 𝐂𝐎𝐋𝐋𝐄𝐂𝐓𝐈𝐎𝐍 𝐔𝐍𝐋𝐎𝐂𝐊𝐄𝐃 🔥
 
@@ -26,22 +44,20 @@ def start(message):
 
 𝐀𝐥𝐥 𝐂𝐚𝐭𝐞𝐠𝐨𝐫𝐢𝐞𝐬 𝐢𝐧 𝐎𝐧𝐞 𝐏𝐚𝐜𝐤𝐚𝐠𝐞
 
-💎 𝐎𝐧𝐥𝐲 𝐑𝐬 49₹ 𝐟𝐨𝐫 𝐋𝐢𝐦𝐢𝐭𝐞𝐝 𝐓𝐢𝐦𝐞 💎
+💎 𝐎𝐧𝐥𝐲 ₹49 (Limited Offer) 💎
 
-✅ 𝐅𝐮𝐥𝐥 𝐇𝐃 𝐐𝐮𝐚𝐥𝐢𝐭𝐲
-✅ 𝐈𝐧𝐬𝐭𝐚𝐧𝐭 𝐃𝐞𝐥𝐢𝐯𝐞𝐫𝐲
-✅ 𝟏𝟎𝟎% 𝐖𝐨𝐫𝐤𝐢𝐧𝐠 & 𝐔𝐩𝐝𝐚𝐭𝐞𝐝 𝐋𝐢𝐧𝐤𝐬
-
-𝐋𝐚𝐬𝐭 𝐟𝐞𝐰 𝐬𝐥𝐨𝐭𝐬 𝐚𝐭 49₹ → 𝐃𝐨𝐧'𝐭 𝐦𝐢𝐬𝐬 𝐢𝐭!
+✅ Full HD Quality  
+✅ Instant Delivery  
+✅ 100% Working Links  
 """
 
     markup = InlineKeyboardMarkup()
     markup.add(
-        InlineKeyboardButton("BUY PREMIUM ❤️", callback_data="buy"),
-        InlineKeyboardButton("FREE DEMO 🎉", url="https://t.me/Pomp0mm_bot?start=BQADAQADdxQAAs65sEY6z3rGKGQgPBYE")
+        InlineKeyboardButton("💎 𝐁𝐔𝐘 𝐏𝐑𝐄𝐌𝐈𝐔𝐌", callback_data="buy"),
+        InlineKeyboardButton("🎁 𝐅𝐑𝐄𝐄 𝐃𝐄𝐌𝐎", url="https://t.me/PookiesHub_bot?start=BQADAQADxxYAAn876UVC1Tb49aCdbxYE")
     )
     markup.add(
-        InlineKeyboardButton("𝑷𝑹𝑬𝑴𝑰𝑼𝑴 𝑪𝑶𝑵𝑻𝑬𝑵𝑻 (𝑭𝑹𝑬𝑬) 🥵", url="https://t.me/+nRSyBDy65uQ5YmU1")
+        InlineKeyboardButton("🛠️ 𝐒𝐔𝐏𝐏𝐎𝐑𝐓", url="https://t.me/NYRAHELPCENTRE?text=HELLO%20%20BHAI%20MUJHE%20PREMIUM%20SUBSCRIPTION%20CHAHIYE")
     )
 
     bot.send_photo(
@@ -54,92 +70,118 @@ def start(message):
 # 💰 BUY BUTTON
 @bot.callback_query_handler(func=lambda call: call.data == "buy")
 def buy(call):
-
     text = """💎 𝐏𝐑𝐄𝐌𝐈𝐔𝐌 𝐌𝐄𝐌𝐁𝐄𝐑𝐒𝐇𝐈𝐏 💎
 
-📦 𝐏𝐥𝐚𝐧 : 𝐋𝐢𝐟𝐞𝐭𝐢𝐦𝐞 𝐀𝐜𝐜𝐞𝐬𝐬
-💰 𝐏𝐫𝐢𝐜𝐞 : ₹49
+📦 Plan: Lifetime  
+💰 Price: ₹49  
 
-━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━  
+🏦 UPI ID: <code>q78849684@ybl</code>  
+━━━━━━━━━━━━━━━  
 
-🏦 𝐔𝐏𝐈 𝐈𝐃 : `q78849684@ybl`
-
-📲 𝐒𝐜𝐚𝐧 𝐭𝐡𝐞 𝐐𝐑 𝐚𝐧𝐝 𝐜𝐨𝐦𝐩𝐥𝐞𝐭𝐞 𝐩𝐚𝐲𝐦𝐞𝐧𝐭
-
-━━━━━━━━━━━━━━━
-
-💡 𝐀𝐟𝐭𝐞𝐫 𝐬𝐮𝐜𝐜𝐞𝐬𝐬𝐟𝐮𝐥 𝐩𝐚𝐲𝐦𝐞𝐧𝐭  
-𝐂𝐥𝐢𝐜𝐤 𝐭𝐡𝐞 𝐛𝐮𝐭𝐭𝐨𝐧 𝐛𝐞𝐥𝐨𝐰
-
-🔥 Limited slots — don't miss out!
+💡 Payment ke baad button click karo 👇
 """
 
     markup = InlineKeyboardMarkup()
     markup.add(
-        InlineKeyboardButton("𝐆𝐄𝐓 𝐏𝐑𝐈𝐕𝐀𝐓𝐄 𝐂𝐇𝐀𝐍𝐍𝐄𝐋 𝐋𝐈𝐍𝐊 ✅", callback_data="paid")
+        InlineKeyboardButton("✅ 𝐆𝐄𝐓 𝐂𝐇𝐀𝐍𝐍𝐄𝐋 𝐋𝐈𝐍𝐊", callback_data="paid")
     )
 
     bot.send_photo(
         chat_id=call.from_user.id,
         photo="https://kommodo.ai/i/nGT8k6KYx4dU09gc1NC2",
         caption=text,
-        parse_mode="Markdown",
         reply_markup=markup
     )
 
     bot.answer_callback_query(call.id)
 
-# ❌ PAYMENT FAILED (CHAT MESSAGE)
+# ❌ PAYMENT CHECK
 @bot.callback_query_handler(func=lambda call: call.data == "paid")
 def paid(call):
-    bot.answer_callback_query(call.id, "❌ PAYMENT FAILED")
+    bot.answer_callback_query(call.id, "❌ Payment not detected")
 
     bot.send_message(
         call.from_user.id,
-        "❌ PAYMENT FAILED\n\nPayment karo, fir try karo. (Make the payment, then try again)"
+        "❌ Payment failed. Pehle payment karo phir try karo."
     )
 
-# 🚫 BAN USER
+# 📊 STATS
+@bot.message_handler(commands=['stats'])
+def stats(message):
+    if message.from_user.id != ADMIN_ID:
+        return
+
+    bot.reply_to(message,
+        f"""📊 BOT STATS
+
+👤 Total Users: {len(users)}
+🚫 Banned: {len(banned_users)}
+"""
+    )
+
+# 🚫 BAN
 @bot.message_handler(commands=['ban'])
-def ban_user(message):
+def ban(message):
     if message.from_user.id != ADMIN_ID:
         return
 
     try:
         user_id = int(message.text.split()[1])
         banned_users.add(user_id)
-        bot.reply_to(message, "User banned 🚫")
+        save_data(BANNED_FILE, user_id)
+        bot.reply_to(message, "🚫 User banned")
     except:
         bot.reply_to(message, "Usage: /ban user_id")
 
-# ✅ UNBAN USER
+# ✅ UNBAN
 @bot.message_handler(commands=['unban'])
-def unban_user(message):
+def unban(message):
     if message.from_user.id != ADMIN_ID:
         return
 
     try:
         user_id = int(message.text.split()[1])
         banned_users.discard(user_id)
-        bot.reply_to(message, "User unbanned ✅")
+        bot.reply_to(message, "✅ User unbanned")
     except:
         bot.reply_to(message, "Usage: /unban user_id")
 
-# 📢 BROADCAST
+# 📢 BROADCAST (ALL TYPES)
 @bot.message_handler(commands=['broadcast'])
 def broadcast(message):
     if message.from_user.id != ADMIN_ID:
         return
 
-    text = message.text.replace('/broadcast ', '')
+    if not message.reply_to_message:
+        bot.reply_to(message, "Reply to any message to broadcast ❌")
+        return
+
+    msg = message.reply_to_message
+    success = 0
+    failed = 0
 
     for user in users:
+        if user in banned_users:
+            continue
+
         try:
-            bot.send_message(user, text)
+            bot.copy_message(
+                chat_id=user,
+                from_chat_id=message.chat.id,
+                message_id=msg.message_id
+            )
+            success += 1
         except:
-            pass
+            failed += 1
 
-    bot.reply_to(message, "Broadcast sent ✅")
+    bot.reply_to(message,
+        f"""📢 Broadcast Done
 
-print("Bot Running...")
+✅ Success: {success}
+❌ Failed: {failed}
+"""
+    )
+
+print("🔥 Bot Running...")
 bot.infinity_polling()
