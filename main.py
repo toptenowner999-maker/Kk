@@ -53,13 +53,13 @@ def start(message):
 
 𝐀𝐥𝐥 𝐂𝐚𝐭𝐞𝐠𝐨𝐫𝐢𝐞𝐬 𝐢𝐧 𝐎𝐧𝐞 𝐏𝐚𝐜𝐤𝐚𝐠𝐞
 
-💎 𝐎𝐧𝐥𝐲 𝐑𝐬 𝟒𝟗₹ 𝐟𝐨𝐫 𝐋𝐢𝐦𝐢𝐭𝐞𝐝 𝐓𝐢𝐦𝐞 💎
+💎 𝐎𝐧𝐥𝐲 𝐑𝐬 𝟗𝟗₹ 𝐟𝐨𝐫 𝐋𝐢𝐦𝐢𝐭𝐞𝐝 𝐓𝐢𝐦𝐞 💎
 
 ✅ 𝐅𝐮𝐥𝐥 𝐇𝐃  𝐐𝐮𝐚𝐥𝐢𝐭𝐲
 ✅ 𝐈𝐧𝐬𝐭𝐚𝐧𝐭 𝐃𝐞𝐥𝐢𝐯𝐞𝐫𝐲
 ✅ 𝟏𝟎𝟎% 𝐖𝐨𝐫𝐤𝐢𝐧𝐠 & 𝐔𝐩𝐝𝐚𝐭𝐞𝐝 𝐋𝐢𝐧𝐤𝐬
 
-𝐋𝐚𝐬𝐭 𝐟𝐞𝐰 𝐬𝐥𝐨𝐭𝐬 𝐚𝐭 𝟒𝟗₹→ 𝐃𝐨𝐧’𝐭 𝐦𝐢𝐬𝐬 𝐢𝐭!
+𝐋𝐚𝐬𝐭 𝐟𝐞𝐰 𝐬𝐥𝐨𝐭𝐬 𝐚𝐭 𝟗𝟗₹ → 𝐃𝐨𝐧’𝐭 𝐦𝐢𝐬𝐬 𝐢𝐭!
 
 👇 𝐁𝐔𝐘 𝐏𝐑𝐄𝐌𝐈𝐔𝐌 👇  
 """
@@ -86,7 +86,7 @@ def buy(call):
     text = """💎 𝐏𝐑𝐄𝐌𝐈𝐔𝐌 𝐌𝐄𝐌𝐁𝐄𝐑𝐒𝐇𝐈𝐏 💎
 
 📦 Plan: Lifetime  
-💰 Price: ₹49  
+💰 Price: ₹99  
 
 ━━━━━━━━━━━━━━━  
 🏦 UPI ID: <code>q78849684@ybl</code>  
@@ -107,7 +107,7 @@ def buy(call):
 
     bot.send_photo(
         chat_id=call.from_user.id,
-        photo="https://kommodo.ai/i/nGT8k6KYx4dU09gc1NC2",
+        photo="https://kommodo.ai/i/0I99U1eyZ3UxT2559JTz",
         caption=text,
         reply_markup=markup
     )
